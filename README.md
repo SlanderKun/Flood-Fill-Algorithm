@@ -2,6 +2,6 @@
 
 ## Description
 
-This site is joke, you can try yourself. I recommend that you enjoy watching it.
+This site is joke, you can try it yourself. I recommend that you enjoy watching it.
 
 ##### made by SlanderKun
