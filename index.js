@@ -25,6 +25,7 @@ const uiElements = {
     agnes: document.getElementsByClassName("agnesTachyon")[0],
     anvil: document.getElementsByClassName("anvil")[0],
     paymentContainer: document.getElementsByClassName("paymentContainer")[0],
+    skipButton: document.getElementsByClassName("skipButton")[0],
 }
 
 const adjustedDelay = async(ms) => {
@@ -177,6 +178,11 @@ const initFloodField = (xSize, ySize) => {
     })
 }
 
+const skipButtonStart = async (xSize, ySize) => {
+    initFloodField(xSize, ySize)
+    uiElements.header.style.display = "none"
+}
+
 const startGeneratedFloodField = async (xSize, ySize) => {
     initFloodField(xSize, ySize)
 
@@ -238,17 +244,20 @@ document.addEventListener('visibilitychange', () => {
 });
 
 const main = () => {
-    const submitButton = document.getElementsByClassName("buttonContainer__submitButtonContainer__button")[0]
     const xInput = document.getElementById("x")
     const yInput = document.getElementById("y")
 
     numberInputValid()
 
 
-    submitButton.addEventListener("click", async ()=> {
+    uiElements.submitButton.addEventListener("click", async ()=> {
         await startGeneratedFloodField(xInput.value, yInput.value)
     })
-// console.log(createTable(fieldArray))
+
+    uiElements.skipButton.addEventListener("click", async ()=> {
+        await skipButtonStart(xInput.value, yInput.value)
+    })
+
 }
 
 main()
