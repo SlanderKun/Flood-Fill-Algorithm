@@ -6,52 +6,120 @@
     <title>Flood fill algorithm</title>
     <link href="./reset-style.css" rel="stylesheet" />
     <link href="./index.css" rel="stylesheet" />
-    <script src="./index.js" ></script>
+    <link href="./payment-gateway.css" rel="stylesheet" />
+    <script defer src="./index.js" ></script>
 </head>
 <body>
     <div class="appContainer">
+        <div class="agnesTachyonContainer">
+            <div class="agnesTachyon">
+                <img src="./assets/img/agnes.png" alt="agnesTachyon" />
+            </div>
+            <div class="anvil">
+                <img src="./assets/img/anvil.png" alt="anvil" />
+            </div>
+        </div>
+        <div class="paymentContainer">
+            <section class="paymentContainer__form">
+                <div class="row">
+                    <div class="column">
+                        <h3 class="title">Billing Address</h3>
+                        <div class="input-box">
+                            <span>Full Name :</span>
+                            <input type="text" placeholder="Jacob Aiden">
+                        </div>
+                        <div class="input-box">
+                            <span>Email :</span>
+                            <input type="email" placeholder="example@example.com">
+                        </div>
+                        <div class="input-box">
+                            <span>Address :</span>
+                            <input type="text" placeholder="Room - Street - Locality">
+                        </div>
+                        <div class="input-box">
+                            <span>City :</span>
+                            <input type="text" placeholder="Berlin">
+                        </div>
+
+                        <div class="flex">
+                            <div class="input-box">
+                                <span>State :</span>
+                                <input type="text" placeholder="Germany">
+                            </div>
+                            <div class="input-box">
+                                <span>Zip Code :</span>
+                                <input type="number" placeholder="123 456">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="column">
+                        <h3 class="title">Payment</h3>
+                        <div class="input-box">
+                            <span>Cards Accepted :</span>
+                            <img src="./assets/img/imgcards.png" alt="">
+                        </div>
+                        <div class="input-box">
+                            <span>Name On Card :</span>
+                            <input type="text" placeholder="Mr. Jacob Aiden">
+                        </div>
+                        <div class="input-box">
+                            <span>Credit Card Number :</span>
+                            <input type="number" placeholder="1111 2222 3333 4444">
+                        </div>
+                        <div class="input-box">
+                            <span>Exp. Month :</span>
+                            <input type="text" placeholder="August">
+                        </div>
+
+                        <div class="flex">
+                            <div class="input-box">
+                                <span>Exp. Year :</span>
+                                <input type="number" placeholder="2025">
+                            </div>
+                            <div class="input-box">
+                                <span>CVV :</span>
+                                <input type="number" placeholder="123">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn">Submit</button>
+            </section>
+        </div>
         <header id="header">
             <div class="header__wrapper">
                 <h1 class="headerTitle">Flood fill app</h1>
+                <div class="separator"></div>
                 <div class="buttonContainer__wrapper">
-                    <div class="buttonContainer">
-                        <div class="buttonContainer__input">
-                            <h3>Cord x:</h3>
-                            <label class="buttonContainer__input__label">
-                                <input oninput="this.value = Math.round(this.value);" type="number" class="floodCordInput">
+                    <div class="buttonContainer__content">
+                        <h2 class="buttonContainer__content__title">Field size</h2>
+                        <div class="buttonContainer__content__input">
+                            <label for="x">
+                                Rows:
                             </label>
+                            <input value="2" min="1" max="99" type="number" id="x">
                         </div>
-                        <div class="buttonContainer__input">
-                            <h3>Cord y:</h3>
-                            <label class="buttonContainer__input__label">
-                                <input oninput="this.value = Math.round(this.value);" type="number" class="floodCordInput">
+                        <div class="buttonContainer__content__input">
+                            <label for="y">
+                                Columns:
                             </label>
+                            <input value="2" max="99" type="number" id="y">
                         </div>
-                        <div class="buttonContainer__input">
-                            <h3>New color:</h3>
-                            <label>
-                                <input class="floodColorPicker" type="color">
-                            </label>
-                        </div>
-                    </div>
-                    <div class="submitButtonContainer">
-                        <input value="Generate" type="submit">
                     </div>
                 </div>
                 <div class="separator"></div>
-                <div class="headerHideButton">
-                    <svg viewBox="0 0 17 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                        <path d="M16.354 11.896l-0.707 0.707-7.147-7.146-7.146 7.146-0.707-0.707 7.853-7.853 7.854 7.853z" fill="#000000" />
-                    </svg>
+                <div class="buttonContainer__submitButtonContainer">
+                    <button class="buttonContainer__submitButtonContainer__button">I got this</button>
                 </div>
+                <div class="invincibleBlock"></div>
             </div>
         </header>
         <main>
-            <section class="displaySection">
-
+            <section class="displaySection__wrapper">
+                <div class="displaySection"></div>
             </section>
         </main>
-        <footer></footer>
     </div>
 </body>
 </html>
