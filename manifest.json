@@ -1,0 +1,14 @@
+{
+  "name": "Flood-Fill",
+  "short_name": "FloodFill",
+  "description": "FloodFill - сайт с алгортиом",
+  "start_url": "/",
+  "version": "1",
+  "lang": "ru-RU",
+  "theme_color": "#21ac50",
+  "background_color": "#21ac50",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay"],
+  "orientation": "portrait",
+  "capture_links": "existing_client_event"
+}

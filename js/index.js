@@ -1,9 +1,10 @@
 // Made by SlanderKun
 
-let isPaused = false;
-let pauseStart = 0;
-let accumulatedPauseTime = 0;
+let isPaused = false
+let pauseStart = 0
+let accumulatedPauseTime = 0
 let inProcess = false
+let isNewFlood = true
 
 const sounds = {
     iGotThisSound: new Audio("./assets/sound/i-got-this.mp3"),
@@ -102,23 +103,17 @@ const randomArray = (xSize, ySize) => {
     )
 }
 
-const floodFill = async (grid, row, col, newColor) => {
-    if (inProcess) {
-        return
-    }
+const isCellValid = () => {
+    return (row < 0 || row >= rows || col < 0 || col >= cols || oldColor === newColor)
+}
 
-    inProcess = true
+const floodOne = async (grid, row, col, newColor) => {
+    const queue = [[row, col]]
+    const directions = [[-1, 0], [0, 1], [1, 0], [0, -1]]
+    const oldColor = grid[row][col]
 
     const rows = grid.length
     const cols = grid[0].length
-    const oldColor = grid[row][col]
-
-    if (row < 0 || row >= rows || col < 0 || col >= cols || oldColor === newColor) {
-        return
-    }
-
-    const queue = [[row, col]]
-    const directions = [[-1, 0], [0, 1], [1, 0], [0, -1]]
 
     while (queue.length > 0) {
         const [currentRow, currentCol] = queue.shift()
@@ -147,6 +142,79 @@ const floodFill = async (grid, row, col, newColor) => {
             queue.push([currentRow + dr, currentCol + dc])
         }
     }
+}
+
+const floodTwo = async (grid, row, col, newColor) => {
+    let currentQueue = [[row, col]]
+    let newQueue = []
+    const directions = [[-1, 0], [0, 1], [1, 0], [0, -1]]
+    const oldColor = grid[row][col]
+
+    const rows = grid.length
+    const cols = grid[0].length
+
+    while (currentQueue.length > 0) {
+        newQueue = []
+        for (let i = 0; i < currentQueue.length; i++) {
+            const [currentRow, currentCol] = currentQueue[i]
+
+            if (
+                currentRow < 0 ||
+                currentRow >= rows ||
+                currentCol < 0 ||
+                currentCol >= cols ||
+                grid[currentRow][currentCol] !== oldColor
+            ) {
+                continue;
+            }
+
+            for (const [dr, dc] of directions) {
+                newQueue.push([currentRow + dr, currentCol + dc])
+            }
+
+            grid[currentRow][currentCol] = newColor%10
+
+            const cell = document.getElementById(`cell-${currentRow}-${currentCol}`)
+            if (cell) {
+                cell.firstChild.style.backgroundColor = colorMapper[newColor%10]
+                cell.firstChild.style.width = "50px"
+                cell.firstChild.style.height = "50px"
+                setTimeout(() => {
+                    cell.firstChild.style.width = "45px"
+                    cell.firstChild.style.height = "45px"
+                }, 100)
+            }
+        }
+        console.log("work")
+        await new Promise(resolve => setTimeout(resolve, 100))
+        currentQueue = newQueue
+    }
+}
+
+const floodFill = async (grid, row, col, newColor) => {
+    if (inProcess) {
+        return
+    }
+
+    inProcess = true
+
+    const rows = grid.length
+    const cols = grid[0].length
+    const oldColor = grid[row][col]
+
+    if (row < 0 || row >= rows || col < 0 || col >= cols || oldColor === newColor) {
+        return
+    }
+
+    const queue = [[row, col]]
+    const directions = [[-1, 0], [0, 1], [1, 0], [0, -1]]
+
+    if (isNewFlood) {
+        await floodTwo(grid, row, col, newColor)
+    } else {
+        await floodOne(grid, row, col, newColor)
+    }
+
     inProcess = false
 }
 
